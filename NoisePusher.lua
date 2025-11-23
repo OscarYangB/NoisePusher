@@ -21,11 +21,13 @@ function execute()
   
   for it in image:pixels() do
     local pixel = it()
-    local r = processPixel(app.pixelColor.rgbaR(pixel))
-    local g = processPixel(app.pixelColor.rgbaG(pixel))
-    local b = processPixel(app.pixelColor.rgbaB(pixel))
-    local newPixel = app.pixelColor.rgba(r, g, b)
-    it(newPixel)
+    if app.pixelColor.rgbaA(pixel) ~= 0 then
+      local r = processPixel(app.pixelColor.rgbaR(pixel))
+      local g = processPixel(app.pixelColor.rgbaG(pixel))
+      local b = processPixel(app.pixelColor.rgbaB(pixel))
+      local newPixel = app.pixelColor.rgba(r, g, b)
+      it(newPixel)
+    end
   end
   
   local layer = app.activeSprite:newLayer()
